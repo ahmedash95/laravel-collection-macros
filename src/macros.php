@@ -218,19 +218,20 @@ if (! Collection::hasMacro('transpose')) {
 if (! Collection::hasMacro('collectBy')) {
     /*
      * Split Array based on Condition.
-     * 
+     *
      * @param  callback  $
      * @return \Illuminate\Support\Collection
      */
-	Collection::macro("collectBy",function($callback): Collection {
-		$array = [];
-		$this->each(function($row) use ($callback,&$array){
-			if($callback($row)) {
-				$array[0][] = $row;
-			} else {
-				$array[1][] = $row;
-			}
-		});
-		return new static($array);
-	});
+    Collection::macro('collectBy', function ($callback): Collection {
+        $array = [];
+        $this->each(function ($row) use ($callback, &$array) {
+            if ($callback($row)) {
+                $array[0][] = $row;
+            } else {
+                $array[1][] = $row;
+            }
+        });
+
+        return new static($array);
+    });
 }
